@@ -1,0 +1,125 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "com.roche.rgsficntrechargedefinition",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.18.4",
+      "toolsId": "4049b389-02de-498a-a25b-ba6ee11e325f"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/odata/v4/recharge",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "2.0"
+        }
+      },
+      "catalogService": {
+        "uri": "/odata/v4/recharge/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.138.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.roche.rgsficntrechargedefinition.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "com.roche.rgsficntrechargedefinition.view",
+        "async": true,
+        "viewPath": "com.roche.rgsficntrechargedefinition.view"
+      },
+      "routes": [
+        {
+          "name": "RouteRecharge",
+          "pattern": ":?query:",
+          "target": [
+            "TargetRecharge"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetRecharge": {
+          "id": "Recharge",
+          "name": "Recharge"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.roche.rgsficntrechargedefinition.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

@@ -1,0 +1,300 @@
+<mvc:View displayBlock="true" id="idHIMDOCmasterPage" height="100%" controllerName="com.roche.rgsficntrechargedefinition.controller.Recharge"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartvariants="sap.ui.comp.smartvariants"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="true" headerContentPinnable="true" isChildPage="false" upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:snappedHeading>
+                    <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+                        <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center">
+                            <Title text="{i18n>appTitle}" wrapping="true" />
+                        </FlexBox>
+                    </FlexBox>
+                </uxap:snappedHeading>
+                <uxap:expandedHeading>
+                    <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+                        <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center">
+                            <Title text="{i18n>appTitle}" wrapping="true" />
+                        </FlexBox>
+                    </FlexBox>
+                </uxap:expandedHeading>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <smartvariants:SmartVariantManagement id="idSmartVariantManagement" persistencyKey="pKeyPageVariantManagement" showExecuteOnSelection="true" showShare="true"/>
+            <smartFilterBar:SmartFilterBar id="smartFilterHimdoc" entitySet="RechargeType" enableBasicSearch="true" basicSearchFieldName="CODE" persistencyKey="UniqueAndStablePersistencyKeyFilterHimdocs" liveMode="true" beforeVariantFetch="onBeforeVariantFetch" afterVariantLoad="onAfterVariantLoad" initialise="onFInitialise" pendingChange="handleFilterChange" smartVariant="idSmartVariantManagement" assignedFiltersChanged="handleFilterChange">
+                <smartFilterBar:controlConfiguration>
+                    <smartFilterBar:ControlConfiguration key="FAV" label="{i18n>mFav}" groupId="_BASIC" visibleInAdvancedArea="true">
+                        <smartFilterBar:customControl>
+                            <ObjectStatus tooltip="{= ${masterFav>/favorite} ? ${i18n>unFav} : ${i18n>fav} }" icon="{= ${masterFav>/favorite} ? 'sap-icon://favorite' : 'sap-icon://unfavorite'}" press="onFavFilter" active="true"/>
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration key="SITE" label="Site" groupId="_BASIC" visibleInAdvancedArea="true">
+                        <smartFilterBar:customControl>
+                            <MultiInput id="multiSitesInput1" required="false" tokenUpdate="onSiteTokenUpdate" valueHelpRequest=".onValueHelpSites1"/>
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration key="AGG_CCODE" label="Country" groupId="_BASIC" visibleInAdvancedArea="true">
+                      </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration key="DOC_TYPE" groupId="_BASIC" visibleInAdvancedArea="true">
+                        <smartFilterBar:customControl>
+                            <MultiComboBox id="docFilter" showSelectAll="true" showSecondaryValues="true" width="100%" items="{path: 'catalogModel>/HIMDOCStandardDocTemplates', filters: [],                                            sorter: {path: 'DOC_DESCRIPTION', descending: false}}">
+                                <core:Item key="{catalogModel>DOC_TYPE}" text="{catalogModel>DOC_TYPE} - {catalogModel>DOC_DESCRIPTION}" />
+                            </MultiComboBox>
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration key="LANDSCAPE_PROCESS_ID" groupId="_BASIC" visibleInAdvancedArea="true">
+                        <smartFilterBar:customControl>
+                            <MultiInput id="multiInputProcess" required="false" valueHelpRequest="onValueHelpProcess"/>
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration key="STEP_ID" groupId="_BASIC" visibleInAdvancedArea="true">
+                        <smartFilterBar:customControl>
+                            <MultiComboBox id="setpFilter" showSelectAll="true" showSecondaryValues="true" width="100%" items="{path: 'catalogModel>/HimdocSubProcesses', filters: [], sorter: {path: 'DESCRIPTION', descending: false}}">
+                                <core:Item key="{catalogModel>ID}" text="{catalogModel>DESCRIPTION}" />
+                            </MultiComboBox>
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+                </smartFilterBar:controlConfiguration>
+                <smartFilterBar:layoutData>
+                    <FlexItemData shrinkFactor="0" />
+                </smartFilterBar:layoutData>
+            </smartFilterBar:SmartFilterBar>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <smartTable:SmartTable id="smartMasterTableHimdoc" enableAutoBinding="true" entitySet="RechargeType" tableType="ResponsiveTable" useTablePersonalisation="true" header="{i18n>himdocs}" showRowCount="true" smartFilterId="smartFilterHimdoc" persistencyKey="UniqueAndStablePersistencyKeyMasterTableHimdocs" useVariantManagement="true" showDetailsButton="true" demandPopin="true" enableAutoColumnWidth="true" placeToolbarInTable="true" beforeRebindTable="onBeforeRebind" ignoredFields="CLAUSE_ID,STANDARD_CODE,OLD_HIMDOC,CORE_PROCESS_ID,VIEW_MODE_ID,DOCUMENT_LEVEL_TEXT,DOCUMENT_MODE_TEXT,APPROVAL_OF_DISTRIBUTION,PAPER_DISTRIBUTION,RESPONSIBLE_PAPER_CONTACT,AUTHOR_APPROVAL,MANAGEMENT_APPTOVER,DOCUMENT_LEVEL_ID,MANAGEMENT_APPROVAL,SYSTEM_APPROVER,SYSTEM_APPROVAL,STATUS_TEXT,HIMDOC_NO,SITE_AREA_ID,WORK_AREA_ID,ID,DOCUMENT_TEXT,DOC_DESCRIPTION">
+                            <smartTable:layoutData>
+                                <FlexItemData growFactor="1" baseSize="0%" />
+                            </smartTable:layoutData>
+                            <smartTable:customToolbar>
+                                <OverflowToolbar design="Transparent">
+                                    <ToolbarSpacer />
+                                    <Button id="idShareLink" text="Share Link" type="Emphasized" press="handleShareLink" visible="{= ${masterFav>/favorite} ? false : true}" enabled="true" tooltip="" />
+                                    <Button id="idDocumentCreate" text="Create a new document" type="Emphasized" press="handleCreateNewRequest" enabled="true" tooltip="" visible="{path : 'UserInfo>/ROLE_COLLECTIONS' , formatter: '.fnFormatCreateButtonVisibility'}"/>
+                                </OverflowToolbar>
+                            </smartTable:customToolbar>
+                            <Table id="masterTableDocumentManagement" growing="true" growingScrollToLoad="true" growingThreshold="100" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" class="radioButtonGroup" mode="SingleSelectMaster" itemPress="handleItemPress" selectionChange="onRadioSelectionChange">
+                                <columns>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "CODE", "maxLength": "100","columnIndex":"0", "leadingProperty": "CODE", "sortProperty": "CODE", "filterProperty": "CODE", "type": "string", "additionalProperty":"ID"}' />
+                                        </customData>
+                                        <Text text="{i18n>himdocNo}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="true">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "REVISION", "maxLength": "4", "columnIndex": "1", "leadingProperty": "REVISION", "sortProperty": "REVISION", "filterProperty": "REVISION", "type": "integer"}' />
+                                        </customData>
+                                        <Text text="{i18n>rev}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "DOC_TYPE", "maxLength": "100","columnIndex":"2", "leadingProperty": "DOC_TYPE", "sortProperty": "DOC_TYPE", "filterProperty": "DOC_TYPE", "type": "string", "additionalProperty": "DOC_DESCRIPTION"}' />
+                                        </customData>
+                                        <Text text="{i18n>docmentType}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "DOCUMENT_LEVEL_ID", "maxLength": "100","columnIndex":"3", "leadingProperty": "DOCUMENT_LEVEL_ID", "sortProperty": "DOCUMENT_LEVEL_ID", "filterProperty": "DOCUMENT_LEVEL_ID", "type": "string","additionalProperty": "DOCUMENT_LEVEL_TEXT"}' />
+                                        </customData>
+                                        <Text text="{i18n>documentlevel}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "STATUS_ID", "columnIndex":"4", "leadingProperty": "STATUS_ID", "type": "string","sortProperty": "STATUS_TEXT", "additionalProperty": "STATUS_TEXT"}' />
+                                        </customData>
+                                        <Text text="{i18n>status}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "TITLE", "maxLength": "100","columnIndex":"5", "leadingProperty": "TITLE", "sortProperty": "TITLE", "filterProperty": "TITLE", "type": "string"}' />
+                                        </customData>
+                                        <Text text="{i18n>doctitle}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "LANDSCAPE_PROCESS_ID", "maxLength": "100","columnIndex":"6", "leadingProperty": "LANDSCAPE_PROCESS_ID", "sortProperty": "LANDSCAPE_PROCESS_ID", "filterProperty": "LANDSCAPE_PROCESS_ID", "type": "string"}'                                            />
+                                        </customData>
+                                        <Text text="{i18n>process}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "OWNER", "maxLength": "100","columnIndex":"7", "leadingProperty": "OWNER", "sortProperty": "OWNER", "filterProperty": "OWNER", "type": "string"}' />
+                                        </customData>
+                                        <Text text="{i18n>owner}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "FAV", "columnIndex":"8", "leadingProperty": "FAV", "type": "Boolean"}' />
+                                        </customData>
+                                        <Text text="{i18n>mFav}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "STEP_ID", "maxLength": "100","columnIndex":"19", "leadingProperty": "STEP_ID", "sortProperty": "STEP_ID", "filterProperty": "STEP_ID", "type": "string","additionalProperty": "STEP_TEXT"}' />
+                                        </customData>
+                                        <Text text="Step / Activity" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "DOCUMENT_MODE", "maxLength": "100","columnIndex":"20", "leadingProperty": "DOCUMENT_MODE", "sortProperty": "DOCUMENT_MODE", "filterProperty": "DOCUMENT_MODE", "type": "string","additionalProperty": "DOCUMENT_MODE_TEXT"}' />
+                                        </customData>
+                                        <Text text="Document Mode" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "BU", "maxLength": "100","columnIndex":"22", "leadingProperty": "BU", "sortProperty": "BU", "filterProperty": "BU", "type": "string"}'                                            />
+                                        </customData>
+                                        <Text text="Business Unit" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_REGION", "maxLength": "100","columnIndex":"9", "leadingProperty": "AGG_REGION", "sortProperty": "AGG_REGION", "filterProperty": "AGG_REGION", "type": "string"}' />
+                                        </customData>
+                                        <Text text="{i18n>Region}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_SITE", "maxLength": "100","columnIndex":"10", "leadingProperty": "AGG_SITE", "sortProperty": "AGG_SITE", "filterProperty": "AGG_SITE", "type": "string"}' />
+                                        </customData>
+                                        <Text text="{i18n>site}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_CCODE", "maxLength": "100","columnIndex":"11", "leadingProperty": "AGG_CCODE", "sortProperty": "AGG_CCODE", "filterProperty": "AGG_CCODE", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Country" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_SUBREGION", "maxLength": "100","columnIndex":"12", "leadingProperty": "AGG_SUBREGION", "sortProperty": "AGG_SUBREGION", "filterProperty": "AGG_SUBREGION", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Sub Region" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "OLD_HIMDOC_NO", "columnIndex":"13", "sortProperty": "OLD_HIMDOC_NO", "leadingProperty": "OLD_HIMDOC_NO", "type": "string"}' />
+                                        </customData>
+                                        <Text text="{i18n>oldHimdocNo}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "SCOPE", "maxLength": "500","columnIndex":"14","sortProperty": "SCOPE",  "leadingProperty": "SCOPE", "type": "string"}' />
+                                        </customData>
+                                        <Text text="{i18n>othScope}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_TAG_DESC", "columnIndex":"15","sortProperty": "AGG_TAG_DESC",  "leadingProperty": "AGG_TAG_DESC", "type": "string"}' />
+                                        </customData>
+                                        <Text text="{i18n>tags}" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_FUNCTION", "columnIndex":"16","sortProperty": "AGG_FUNCTION",  "leadingProperty": "AGG_FUNCTION", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Functions" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_SBU", "columnIndex":"17","sortProperty": "AGG_SBU",  "leadingProperty": "AGG_SBU", "type": "string"}' />
+                                        </customData>
+                                        <Text text="SBU" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_SITE_AREA", "columnIndex":"18","sortProperty": "AGG_SITE_AREA",  "leadingProperty": "AGG_SITE_AREA", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Site Area" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_WORK_AREA", "columnIndex":"18","sortProperty": "AGG_WORK_AREA",  "leadingProperty": "AGG_WORK_AREA", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Work Area" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_SYSTEM_APPROVER", "columnIndex":"18","sortProperty": "AGG_SYSTEM_APPROVER",  "leadingProperty": "AGG_SYSTEM_APPROVER", "type": "string"}' />
+                                        </customData>
+                                        <Text text="System Approver" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_MANAGMENT_APPROVER", "columnIndex":"18","sortProperty": "AGG_MANAGMENT_APPROVER",  "leadingProperty": "AGG_MANAGMENT_APPROVER", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Management Approver" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_STANDARD", "columnIndex":"27","sortProperty": "AGG_STANDARD", "filterProperty": "AGG_STANDARD", "leadingProperty": "AGG_STANDARD", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Standards" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "AGG_CLAUSE", "columnIndex":"27","sortProperty": "AGG_CLAUSE", "filterProperty": "AGG_CLAUSE", "leadingProperty": "AGG_CLAUSE", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Clauses" />
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" visible="false">
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "LINK", "columnIndex":"28","sortProperty": "LINK", "filterProperty": "LINK", "leadingProperty": "LINK", "type": "string"}' />
+                                        </customData>
+                                        <Text text="Link" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Navigation">
+                                        <cells>
+                                            <Text text="{CODE}" />
+                                            <Text text="{REVISION}" />
+                                            <Text text="{DOC_TYPE} - {DOC_DESCRIPTION}" />
+                                            <Text text="{DOCUMENT_LEVEL_TEXT}" />
+                                            <ObjectStatus text="{STATUS_TEXT}" class="bold" state="{path: 'STATUS_ID', formatter: '.fnFormatStatusState'}" icon="{path: 'STATUS_ID', formatter: '.fnFormatStatusIcon'}" />
+                                            <Text text="{TITLE}" />
+                                            <Text text="{LANDSCAPE_PROCESS_ID}" />
+                                            <Text text="{OWNER}" />
+                                            <ObjectStatus icon="{= ${FAV} ? 'sap-icon://favorite' : 'sap-icon://unfavorite'}" tooltip="{= ${FAV} ? ${i18n>unFav} : ${i18n>fav} }" press="onAddFav" active="true"/>
+                                            <Text text="{STEP_TEXT}" />
+                                            <Text text="{DOCUMENT_MODE_TEXT}" />
+                                            <Text text="{BU}" />
+                                            <ExpandableText text="{path:'AGG_REGION'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_SITE'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_CCODE'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_SUBREGION'}" maxCharacters="10" overflowMode="Popover" />
+                                            <Text text="{OLD_HIMDOC_NO}" wrapping="true" />
+                                            <ExpandableText text="{SCOPE}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{AGG_TAG_DESC}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_FUNCTION'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_SBU'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_SITE_AREA'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_WORK_AREA'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_SYSTEM_APPROVER'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_MANAGMENT_APPROVER'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_STANDARD'}" maxCharacters="10" overflowMode="Popover" />
+                                            <ExpandableText text="{path:'AGG_CLAUSE'}" maxCharacters="10" overflowMode="Popover" />
+                                            <Link
+				                                        text="Link to Document"
+                                                        target="_blank"
+				                                        href="{LINK}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </smartTable:SmartTable>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>
