@@ -16,6 +16,10 @@ annotate service.RechargeType with @(
    UI.SelectionFields: [
     rechargeTypeId,
     version,
-    validFrom
+    validFrom,
+    validTo,
+    rechargeAssessmentReq,
+    taxCode
   ]
 );
+

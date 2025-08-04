@@ -56,7 +56,11 @@
       "minUI5Version": "1.138.1",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.f": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.uxap": {},
+        "sap.ui.comp": {}
       }
     },
     "contentDensities": {
@@ -89,29 +93,36 @@
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "transition": "slide",
-        "type": "View",
+        "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
-        "path": "com.roche.rgsficntrechargedefinition.view",
         "async": true,
-        "viewPath": "com.roche.rgsficntrechargedefinition.view"
+        "viewPath": "com.roche.rgsficntrechargedefinition.view",
+        "controlId": "flexibleColumnLayout",
+        "controlAggregation": "beginColumnPages",
+        "transition": "slide"
       },
       "routes": [
         {
-          "name": "RouteRecharge",
-          "pattern": ":?query:",
-          "target": [
-            "TargetRecharge"
-          ]
+          "pattern": "",
+          "name": "master",
+          "target": ["TargetRecharge"]
+        },
+        {
+          "pattern": "detail/{rechargeTypeId}/{version}/{layout}", 
+          "name": "detail",
+          "target": ["TargetRecharge", "TargetDetail"]
         }
       ],
       "targets": {
         "TargetRecharge": {
-          "id": "Recharge",
-          "name": "Recharge"
+          "viewName": "Recharge",
+          "controlAggregation": "beginColumnPages",
+          "viewLevel": 1
+        },
+        "TargetDetail": {
+          "viewName": "Detail",
+         "controlAggregation": "midColumnPages",
+          "viewLevel": 3
         }
       }
     },

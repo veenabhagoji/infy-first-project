@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
+    "sap/ui/model/json/JSONModel",
     "com/roche/rgsficntrechargedefinition/model/models"
-], (UIComponent, models) => {
+], function (UIComponent, JSONModel, models) {
     "use strict";
 
     return UIComponent.extend("com.roche.rgsficntrechargedefinition.Component", {
@@ -12,14 +13,20 @@ sap.ui.define([
             ]
         },
 
-        init() {
+        init: function () {
             // call the base component's init function
             UIComponent.prototype.init.apply(this, arguments);
 
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
 
-            // enable routing
+            // ✅ set global application model
+            var oAppModel = new JSONModel({
+                layout: "OneColumn" // default layout
+            });
+            this.setModel(oAppModel, "globalStorage");
+
+            // initialize routing
             this.getRouter().initialize();
         }
     });

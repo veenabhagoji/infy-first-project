@@ -11,8 +11,8 @@
            
 		</beginColumnPages>
 		
-		<!-- <endColumnPages>
+		<endColumnPages>
           <mvc:XMLView id="endView" viewName="com.roche.rgsficntrechargedefinition.view.Detail"/>
-		</endColumnPages> -->
+		</endColumnPages>
 	</FlexibleColumnLayout>
 </mvc:View>  
