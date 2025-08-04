@@ -21,6 +21,8 @@
 			class="sapUiSmallMargin">
 			
 			<u:FileUploader
+			placeholder="Choose XLSX File"
+			
 				id="fileUploader"
 				name="myFileUpload"
 				uploadUrl="upload/"
@@ -29,8 +31,22 @@
 				
 			<Button
 				text="Sample File Template"
+				 icon="sap-icon://download" 
 				press="onDownloadExcel"/>
 		</HBox>
-		
+		<beginButton>
+			<Button
+				text="Upload File"
+				type="Emphasized"
+				press="onUploadFile"/>
+		</beginButton>
+
+		<endButton>
+			<Button
+				text="Cancel"
+				 type="Reject"
+				press="onCloseDialog"/>
+		</endButton>
+
 	</Dialog>
 </core:FragmentDefinition>

@@ -11,3 +11,7 @@ entity RechargeType {
   validTo                 : Date;
   comment                 : String(500);
 }
+entity TaxCodes {
+  key code        : String;
+      description : String;
+}
