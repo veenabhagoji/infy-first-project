@@ -107,29 +107,27 @@ sap.ui.define([
 
           onMassUploadPress: function () {
             var oView = this.getView();
-      
-            // Load dialog fragment only once
-            if (!this.pMassUploaderDialog) {
-              this.pMassUploaderDialog = Fragment.load({
-                id: oView.getId(),
-                name: "com.roche.rgsficntrechargedefinition.view.fragment.MassUploadDialog",
-                controller: this
-              }).then(function (oDialog) {
-                oView.addDependent(oDialog);
-                oDialog.open();
-              });
+        
+            if (!this._oMassUploadDialog) {
+                Fragment.load({
+                    id: oView.getId(),
+                    name: "com.roche.rgsficntrechargedefinition.view.fragment.MassUploadDialog",
+                    controller: this
+                }).then(function (oDialog) {
+                    this._oMassUploadDialog = oDialog; // Store the dialog instance
+                    oView.addDependent(oDialog);
+                    oDialog.open(); // Open the dialog
+                }.bind(this));
             } else {
-              this.pMassUploaderDialog.then(function (oDialog) {
-                oDialog.open();
-              });
+                this._oMassUploadDialog.open(); // Reuse the dialog instance
             }
-          },
+        },
+        onCloseMassUploaderDialog: function (oEvent) {
+          oEvent.getSource().getParent().close();
+      },
       
-          onCloseMassUploaderDialog: function (oEvent) {
-            oEvent.getSource().getParent().close();
-          },
+        
       
-         
         onDownloadExcel: function () {
             var oSmartTable = this.byId("smartTable");
             var oTable = oSmartTable.getTable(); // your sap.m.Table
@@ -177,6 +175,9 @@ sap.ui.define([
                 { label: "Comment", property: "comment", type: "string" }
             ];
         }
+
+       
+
         
         
 

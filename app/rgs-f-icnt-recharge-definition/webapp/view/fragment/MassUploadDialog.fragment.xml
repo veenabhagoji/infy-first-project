@@ -45,7 +45,7 @@
 			<Button
 				text="Cancel"
 				 type="Reject"
-				press="onCloseDialog"/>
+				press="onCloseMassUploaderDialog"/>
 		</endButton>
 
 	</Dialog>
