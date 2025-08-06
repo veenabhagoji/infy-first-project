@@ -1,0 +1,63 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog
+        id="previewDialog"
+        title="Preview Uploaded Data"
+        contentWidth="80%"
+        contentHeight="60%"
+        resizable="true"
+        draggable="true"
+        class="sapUiResponsivePaddingDialog"
+        stretchOnPhone="true"
+        >
+
+        <VBox>
+            <Table
+                id="previewTable"
+                items="{previewModel>/}"
+                width="100%"
+                inset="false">
+
+                <columns>
+                    <Column><Text text="ID" /></Column>
+                    <Column><Text text="Version" /></Column>
+                    <Column><Text text="Recharge Type" /></Column>
+                    <Column><Text text="Recharge Type Desc" /></Column>
+                    <Column><Text text="Assessment Req" /></Column>
+                    <Column><Text text="Tax Code" /></Column>
+                    <Column><Text text="Valid From" /></Column>
+                    <Column><Text text="Valid To" /></Column>
+                    <Column><Text text="Comment" /></Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{previewModel>rechargeTypeId}" />
+                            <Text text="{previewModel>version}" />
+                            <Text text="{previewModel>rechargeType}" />
+                            <Text text="{previewModel>rechargeTypeDesc}" />
+                            <Text text="{previewModel>rechargeAssessmentReq}" />
+                            <Text text="{previewModel>taxCode}" />
+                            <Text text="{previewModel>validFrom}" />
+                            <Text text="{previewModel>validTo}" />
+                            <Text text="{previewModel>comment}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+
+        <!-- Footer Buttons -->
+        <buttons>
+
+        <Button text="Confirm Upload"  id="idConfirm" type="Emphasized" press=".onUploadFile" />
+
+        <Button text="OK" id="idOk"  press="onClosePreviewDialog" />
+            <Button text="Cancel" type="Reject" id="idCancel" press=".onClosePreviewDialog" />
+    
+        
+            
+            
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

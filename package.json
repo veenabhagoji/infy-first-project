@@ -9,7 +9,8 @@
     "@sap/cds": "^9",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
     "cds-spreadsheetimporter-plugin": "^1.0.3",
-    "express": "^4"
+    "express": "^4",
+    "ui5-cc-spreadsheetimporter": "^2.3.0"
   },
   "engines": {
     "node": ">=20"

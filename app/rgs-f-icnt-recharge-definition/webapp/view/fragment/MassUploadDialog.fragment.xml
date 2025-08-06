@@ -9,36 +9,55 @@
 		draggable="true"
 		resizable="true"
 		contentWidth="30rem"
-		contentHeight="auto"
+		contentHeight="7rem"
 		horizontalScrolling="false"
 		verticalScrolling="false">
 		
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Label text="Mass Uploader" design="Bold" />
+				</contentLeft>
+				<contentRight>
+					<Button
+						text="Preview"
+						icon="sap-icon://inspect"
+						type="Transparent"
+						press="onPreview"/>
+
+			 <Button
+				text="Sample File Template"
+				 icon="sap-icon://download" 
+				press="onDownloadExcel"/>
+				</contentRight>
+			</Bar>
+		</customHeader>
+
 		<HBox
 			width="100%"
 			height="100%"
 			alignItems="Center"
 			
-			class="sapUiSmallMargin">
+			>
 			
 			<u:FileUploader
 			placeholder="Choose XLSX File"
-			
+			class="sapUiResponsiveMargin"
 				id="fileUploader"
+				
 				name="myFileUpload"
 				uploadUrl="upload/"
 				tooltip="Upload your file to the local server"
-				uploadComplete="handleUploadComplete"/>
+				uploadComplete="handleUploadComplete"
+				change="onFileChange"/>
 				
-			<Button
-				text="Sample File Template"
-				 icon="sap-icon://download" 
-				press="onDownloadExcel"/>
+			
 		</HBox>
 		<beginButton>
 			<Button
 				text="Upload File"
 				type="Emphasized"
-				press="onUploadFile"/>
+				press="onUpload"/>
 		</beginButton>
 
 		<endButton>

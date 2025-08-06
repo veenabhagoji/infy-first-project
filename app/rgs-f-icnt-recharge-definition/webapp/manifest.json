@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/v2/odata/v4/recharge",
+        "uri": "/v2/odata/v4/recharge/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -76,11 +76,22 @@
       },
       "": {
         "dataSource": "mainService",
-        "preload": true,
+        "type": "sap.ui.model.odata.v2.ODataModel",
         "settings": {
           "operationMode": "Server",
           "autoExpandSelect": true,
           "earlyRequests": true
+        },
+        "preload": true
+      },
+      "catalogService": {
+        "dataSource": "catalogService",
+        "type": "sap.ui.model.odata.v4.ODataModel",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "updateGroupId": "actionGroup" 
         }
       }
     },
@@ -108,7 +119,7 @@
           "target": ["TargetRecharge"]
         },
         {
-          "pattern": "detail/{rechargeTypeId}/{version}/{layout}", 
+          "pattern": "detail/{rechargeTypeId}/{version}/{layout}",
           "name": "detail",
           "target": ["TargetRecharge", "TargetDetail"]
         }
@@ -121,7 +132,7 @@
         },
         "TargetDetail": {
           "viewName": "Detail",
-         "controlAggregation": "midColumnPages",
+          "controlAggregation": "midColumnPages",
           "viewLevel": 3
         }
       }
