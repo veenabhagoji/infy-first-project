@@ -11,14 +11,14 @@
     
         <VBox class="sapUiSmallMargin">
 
-            <!-- Smart Variant Management -->
+            
             <smartvariants:SmartVariantManagement
                 id="idSmartVariantManagement"
                 persistencyKey="pKeyPageVariantManagement"
                 showExecuteOnSelection="true"
                 showShare="true" />
 
-            <!-- Smart Filter Bar -->
+            
             <smartFilterBar:SmartFilterBar
                 id="smartFilterBar"
                 entitySet="RechargeType"
@@ -33,7 +33,7 @@
                 smartVariant="idSmartVariantManagement"
                 assignedFiltersChanged="handleFilterChange" />
 
-            <!-- Smart Table with Toolbar -->
+            
             <smartTable:SmartTable
                 id="smartTable"
                 enableAutoBinding="true"

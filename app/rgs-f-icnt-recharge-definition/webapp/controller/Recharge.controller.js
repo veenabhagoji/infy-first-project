@@ -46,7 +46,7 @@ sap.ui.define([
           onCreatePress: function () {
             const oView = this.getView();
           
-            // Reset the model
+            
             const oModel = oView.getModel("newRecharge");
             oModel.setData({
               
@@ -76,7 +76,7 @@ sap.ui.define([
           onSaveRecharge: function () { 
             const oData = this.getView().getModel("newRecharge").getData();
           
-          //  Add validation logic if needed
+          
             if (!oData.rechargeType || !oData.taxCode) {
               MessageBox.warning("Please fill required fields.");
               return;
@@ -90,7 +90,7 @@ sap.ui.define([
                 success: () => {
                     MessageToast.show("Recharge Type Created");
                     this._oDialog.close();
-                    oModel.refresh(); // refresh list/table
+                    oModel.refresh(); 
                     this._oDialog.close();
                 },
                 error: (oError) => {
@@ -98,7 +98,7 @@ sap.ui.define([
                     console.error(oError);
                 }
             });
-            // Post logic here (OData.create, batch, etc.)
+            
           
           
            
@@ -117,13 +117,13 @@ sap.ui.define([
                     name: "com.roche.rgsficntrechargedefinition.view.fragment.MassUploadDialog",
                     controller: this
                 }).then(function (oDialog) {
-                    this._oMassUploadDialog = oDialog; // Store the dialog instance
+                    this._oMassUploadDialog = oDialog; 
                     oView.addDependent(oDialog);
                     oDialog.open(); 
                     
                 }.bind(this));
             } else {
-                this._oMassUploadDialog.open(); // Reuse the dialog instance
+                this._oMassUploadDialog.open(); 
             }
         },
         onCloseMassUploaderDialog: function (oEvent) {
@@ -134,7 +134,7 @@ sap.ui.define([
       
         onDownloadExcel: function () {
             var oSmartTable = this.byId("smartTable");
-            var oTable = oSmartTable.getTable(); // your sap.m.Table
+            var oTable = oSmartTable.getTable(); 
             var oBinding = oTable.getBinding("items");
         
             if (!oBinding) {
@@ -225,7 +225,7 @@ sap.ui.define([
                         comment: row["Comment"]?.toString().trim()
                     };
                 });
-                  //MessageToast.show("Excel loaded. Ready to upload.");
+                  
               } catch (err) {
                   MessageBox.error("Excel parsing failed: " + err.message);
                   console.error(err);
@@ -240,27 +240,7 @@ sap.ui.define([
         const oModel = this.getView().getModel("catalogService"); 
         let aRechargeTypes =  this._uploadedExcelData;
        
-        //   {
-        //     "rechargeTypeId": "RT001",
-        //     "version": "01",
-        //     "rechargeType": "R&D Cost",
-        //     "rechargeTypeDesc": "Research and Development Recharge",
-        //     "rechargeAssessmentReq": true,
-        //     "taxCode": "TX001",
-        //     "validFrom": "2025-01-01",
-        //     "validTo": "2025-12-31"
-        //   },
-        //   {
-        //     "rechargeTypeId": "RT002",
-        //     "version": "01",
-        //     "rechargeType": "Marketing Expense",
-        //     "rechargeTypeDesc": "Marketing and Advertising Recharge",
-        //     "rechargeAssessmentReq": false,
-        //     "taxCode": "TX002",
-        //     "validFrom": "2025-01-01",
-        //     "validTo": "2025-12-31"
-        //   }
-        // ];
+        
 
         if (!aRechargeTypes || aRechargeTypes.length === 0) {
             MessageBox.warning("No data available to upload.");
@@ -295,7 +275,7 @@ sap.ui.define([
                   this._oMassUploadDialog.close();
               }
 
-   const oTable = this.byId("id_RC_Main_Tbl_Main"); // Replace with your actual table ID
+   const oTable = this.byId("id_RC_Main_Tbl_Main"); 
     if (oTable) {
         const oBinding = oTable.getBinding("items");
         if (oBinding) {
@@ -335,15 +315,15 @@ onPreview: function () {
       return;
   }
 
-  // 1. Create JSONModel and set data
+  
   const oPreviewModel = new sap.ui.model.json.JSONModel(oData);
-  oView.setModel(oPreviewModel, "previewModel"); // Set named model to the view
+  oView.setModel(oPreviewModel, "previewModel"); 
   let buttons = [];
-  // 2. Load and open the dialog
+  
   if (!this._oPreviewDialog) {
       Fragment.load({
           id: oView.getId(),
-          name: "com.roche.rgsficntrechargedefinition.view.fragment.PreviewDialog", // Change this to your actual fragment path
+          name: "com.roche.rgsficntrechargedefinition.view.fragment.PreviewDialog", 
           controller: this
       }).then(oDialog => {
           this._oPreviewDialog = oDialog;
@@ -364,12 +344,12 @@ onPreview: function () {
 },
 
 onConfirmUpload: function () {
-  // Close the preview dialog
+  
   if (this._oPreviewDialog) {
       this._oPreviewDialog.close();
   }
 
-  // Now call your upload function
+  
   this.onUploadFile();
 },
 
@@ -388,15 +368,15 @@ onUpload: function () {
       return;
   }
 
-  // 1. Create JSONModel and set data
+  
   const oPreviewModel = new sap.ui.model.json.JSONModel(oData);
-  oView.setModel(oPreviewModel, "previewModel"); // Set named model to the view
+  oView.setModel(oPreviewModel, "previewModel"); 
   let buttons = [];
-  // 2. Load and open the dialog
+  
   if (!this._oPreviewDialog) {
       Fragment.load({
           id: oView.getId(),
-          name: "com.roche.rgsficntrechargedefinition.view.fragment.PreviewDialog", // Change this to your actual fragment path
+          name: "com.roche.rgsficntrechargedefinition.view.fragment.PreviewDialog", 
           controller: this
       }).then(oDialog => {
           this._oPreviewDialog = oDialog;

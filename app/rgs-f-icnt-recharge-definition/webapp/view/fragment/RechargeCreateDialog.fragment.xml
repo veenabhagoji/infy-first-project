@@ -9,11 +9,7 @@
         emptySpanM="1"
         columnsM="2">
         
-        <!-- <Label text="Recharge Type ID" />
-        <Input value="{newRecharge>/rechargeTypeId}" />
-
-        <Label text="Version" />
-        <Input value="{newRecharge>/version}" /> -->
+       
 
         <Label text="Recharge Type" />
         <Input value="{newRecharge>/rechargeType}" />

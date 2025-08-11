@@ -47,7 +47,7 @@
             </Table>
         </VBox>
 
-        <!-- Footer Buttons -->
+        
         <buttons>
 
         <Button text="Confirm Upload"  id="idConfirm" type="Emphasized" press=".onUploadFile" />
